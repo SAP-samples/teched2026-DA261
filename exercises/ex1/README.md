@@ -28,14 +28,15 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 Use the clickthrough below to get an impression of sharing data products to SAP Snowflake.
 
 
-<iframe 
-  src="bdc-share-to-snowflake-clickthrough.html" 
-  width="100%" 
-  height="800" 
-  frameborder="0"
-  style="border: 1px solid #e2e4e8; border-radius: 8px;">
-</iframe>
-
+<!DOCTYPE html>
+<html>
+<head><title>BDC Data Product Sharing Guide</title></head>
+<body style="margin:0;padding:0;">
+  <iframe src="bdc-share-to-snowflake-clickthrough.html" 
+    style="width:100%;height:100vh;border:none;">
+  </iframe>
+</body>
+</html>
 
 #### Exercise (READ-ONLY)
 For the mentioned nine data products, share each of the data products to SAP Snowflake by following the steps below for each of them.
