@@ -1,4 +1,4 @@
-# Exercise 1 - Exercise 1 Description
+# Exercise 1 - Share SAP-managed Data products from SAP BDC Catalog to SAP Snowflake Horizon Catalog
 
 In this exercise, we will create...
 
