@@ -8,10 +8,10 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 
 
 #### Prequisites
-- You have an BDC system landscape formation with **SAP SuccessFactors**
+- You have an BDC system landscape formation with **SAP SuccessFactors**. 
+- You need to have a SAP BDC Admin role for sharing
 - Following Data Products are already installed and available in the SAP Business Data Cloud catalog:
 
-<br/>
 | # | Data Package | Data Product |
 |---|---|---|
 | 1 | SAP SuccessFactors Learning Data Products | LearningEventHistory |
@@ -24,13 +24,64 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 | 8 | SAP SuccessFactors Skills Data Products | WorkforceSkillsData |
 | 9 | SAP SuccessFactors Employee Central Data Products | WorkforcePerson |
 
+#### Guided Tour
+Use the clickthrough below to get an impression of sharing data products to SAP Snowflake.
 
-- You need to have a SAP BDC Admin role for sharing
+
+<iframe 
+  src="bdc-share-to-snowflake-clickthrough.html" 
+  width="100%" 
+  height="800" 
+  frameborder="0"
+  style="border: 1px solid #e2e4e8; border-radius: 8px;">
+</iframe>
+
+
+#### Exercise (READ-ONLY)
+For the mentioned nine data products, share each of the data products to SAP Snowflake by following the steps below for each of them.
+1. Login to SAP Business Data Cloud Cockpit and click on `Search` to navigate to the Data Catalog.
+<br/>![cockpit](./images/cockpit.png)
+
+2. In the catalog search view, click the Data Products tab in the filter bar to narrow the results to data products only.
+<br/>![dataProductCatalog](./images/dataProductCatalog.png)
+
+3. On the detail page click on the *`Share`*-button to open the dialog
+
+
+
+
+
+4. Enter a `Share Name` and target SAP Databricks `Workspace` and click on `<Share>`-button.
+
+
+
+
+
+5. Login SAP Databricks and navigate to the Unity Catalog.
+
+
+
+
+
+6. Navigate to the `Delta Shares Received`, find the table `cashflow` and click on the tab `Sample Data`.
+
+
+
+
+
+7. Click on `Select Compute`and select `Serverless Starter Warehouse`, then click on `Start and Close`.
+
+
+
+
+
+8. Preview the `cashflow`sample data
+
+
+
 
 
 ## Summary
 
-You've now ...
-
-Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
+You've now learnt how to share data products to SAP Snowflake. Let us now continue to [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](../ex2/README.md)
 
