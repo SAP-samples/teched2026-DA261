@@ -1,26 +1,23 @@
-# Level 1 Heading
+# DA261: Transform business data into AI-supported insights
 
-In this exercise, you will...
+Discover how to share data products across the SAP Business Data Cloud solution and third-party platforms with zero-copy access. In this session, you will learn about SAP Business Data Cloud (SAP BDC) and how the BDC Connect capability enables secure, bidirectional sharing of semantically rich data products with external platforms (here: Snowflake) without duplicating or moving data. You will see how zero-copy sharing preserves business context, governance, and metadata across environments, and walk through the end-to-end flow: from discovering data products in the BDC Catalog, to sharing them with a connected partner system via Delta Sharing, to consuming them directly in the target platform. Whether you are a data architect, analytics lead, or IT decision-maker, this session will show you how to break down data silos while keeping your trusted SAP data in place.
 
-## Level 2 Heading
 
-After completing these steps you will have....
+## Use case Description
+A leading enterprise seeks to harness workforce intelligence by integrating SAP SuccessFactors data with advanced ML capabilities on Snowflake. Ten curated data products — sourced from SAP Business Data Cloud — are federated into Snowflake, establishing a governed, analytics-ready foundation. Two Snowflake Cortex ML workflows are applied: ML.CLASSIFICATION segments employees into transformation readiness tiers, while ML.FORECAST projects 12-month learning completion trajectories at the department level. The resulting enriched dataset is packaged as a custom data product and published back to the SAP BDC Catalog, ensuring discoverability and reusability across the enterprise. Business stakeholders consume the insights through SAP Analytics Cloud dashboards, enabling HR and L&D leaders to make data-driven decisions on workforce upskilling and change readiness at scale.
 
-1.	Click here.
-<br>![](/exercises/ex0/images/00_00_0010.png)
+<br>![Use Case](/exercises/ex0/images/useCase.png)
 
-2.	Insert this code.
-``` abap
- DATA(params) = request->get_form_fields(  ).
- READ TABLE params REFERENCE INTO DATA(param) WITH KEY name = 'cmd'.
-  IF sy-subrc <> 0.
-    response->set_status( i_code = 400
-                     i_reason = 'Bad request').
-    RETURN.
-  ENDIF.
-```
+The exercises are as follows:
+- [Exercise 1 - Share SAP-managed Data products from SAP BDC Catalog to SAP Snowflake Horizon Catalog](../ex1/README.md)
+- [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows (using CoCo Agent)](../ex2/README.md)
+- [Exercise 3 - Create and publish custom derived data product in SAP Snowflake to SAP BDC Catalog](../ex3/README.md)
+- [Exercise 4 - Install custom data product in SAP Datasphere](../ex4/README.md)
+- [Exercise 5 - Consume and model custom data product in SAP Datasphere](../ex5/README.md)
+- [Exercise 6 - Create a report in SAP Analytics Cloud](../ex6/README.md)
+- [Exercise 7 - Use Joule Narrative Agent to gather insights](../ex7/README.md)
 
-## Summary
-
-Now that you have ... 
-Continue to - [Exercise 1 - Exercise 1 Description](../ex1/README.md)
+## Access to Tenants
+URLs
+Username: ABSBDS2983293
+Password: shared during the session
