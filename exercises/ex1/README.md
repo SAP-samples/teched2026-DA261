@@ -25,20 +25,19 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 | 9 | SAP SuccessFactors Employee Central Data Products | WorkforcePerson |
 
 #### Guided Tour
-Use the clickthrough below to get an impression of sharing data products to SAP Snowflake.
+1. Use the clickthrough below to get an impression of sharing data products to SAP Snowflake. Click the button below to launch the interactive prototype.
+
+[![Open Clickthrough](https://img.shields.io/badge/▶-Open%20Interactive%20Clickthrough-blue?style=for-the-badge)](https://www.github.com/SAP-samples/teched2026-DA261/tree/main/exercises/ex1/bdc-share-to-snowflake-clickthrough.html)
 
 
-<!DOCTYPE html>
-<html>
-<head><title>BDC Data Product Sharing Guide</title></head>
-<body style="margin:0;padding:0;">
-  <iframe src="bdc-share-to-snowflake-clickthrough.html" 
-    style="width:100%;height:100vh;border:none;">
-  </iframe>
-</body>
-</html>
+2. Use the clickthrough below to get an impression of mounting data product tables on SAP Snowflake
+
+[![Open Clickthrough](https://img.shields.io/badge/▶-Open%20Interactive%20Clickthrough-blue?style=for-the-badge)](https://tour-viewer.platform.saleo.io/7a84b309-34dc-468d-8203-34a9b494803e)
+
+
 
 #### Exercise (READ-ONLY)
+##### Share data products from SAP BDC Catalog to SAP Snowflake catalog
 For the mentioned nine data products, share each of the data products to SAP Snowflake by following the steps below for each of them.
 1. Login to SAP Business Data Cloud Cockpit and click on `Search` to navigate to the Data Catalog.
 <br/>![cockpit](./images/cockpit.png)
@@ -46,43 +45,44 @@ For the mentioned nine data products, share each of the data products to SAP Sno
 2. In the catalog search view, click the Data Products tab in the filter bar to narrow the results to data products only.
 <br/>![dataProductCatalog](./images/dataProductCatalog.png)
 
-3. On the detail page click on the *`Share`*-button to open the dialog
+3. Search for the data product by name and using the filters.
+<br/>![searchDp](./images/searchDp.png)
 
+4. View the details of the data product. Then, use **Share** button and add target to share with. 
+<br/>![addTarget](./images/addTarget.png)
 
+5. In this case, our desired target is SAP Snowflake.
+<br/>![addTargetSnfl](./images/addTargetSnfl.png)
 
+6. Create the share using the Share button
+<br/>![createShare](./images/createShare.png)
 
+##### Create catalog-linked databases for the zero-copy shared data products in SAP Snowflake
+1. Open SAP Snowflake from the **System Landscape** tab.
 
-4. Enter a `Share Name` and target SAP Databricks `Workspace` and click on `<Share>`-button.
+2. Select **Ingestion** tab to view the shared data products from SAP BDC Catalog
+<br/>![selectIngestion](./images/selectIngestion.png)
 
+3. Select **Zero-Copy** tab since the data is shared without replication
+<br/>![zeroCopy](./images/zeroCopy.png)
 
+4. Select **Available connectors** to find the zero copy BDC Connector
+<br/>![availableConnectors](./images/availableConnectors.png)
 
+5. Select the zero copy connector which has been created during setup.
+<br/>![zeroCopyConnector](./images/zeroCopyConnector.png)
 
+6. Mount the shared data tables that were shared from the SAP BDC Catalog.
+<br/>![mount](./images/mount.png)
 
-5. Login SAP Databricks and navigate to the Unity Catalog.
+7. Once mounted, the data products are ready for consumption in SAP Snowflake.
+<br/>![mounted](./images/mounted.png)
 
-
-
-
-
-6. Navigate to the `Delta Shares Received`, find the table `cashflow` and click on the tab `Sample Data`.
-
-
-
-
-
-7. Click on `Select Compute`and select `Serverless Starter Warehouse`, then click on `Start and Close`.
-
-
-
-
-
-8. Preview the `cashflow`sample data
-
-
-
+8. You can view the mounted databases in the Horizon catalog.
+<br/>![mountedDb](./images/mountedDb.png)
 
 
 ## Summary
 
-You've now learnt how to share data products to SAP Snowflake. Let us now continue to [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](../ex2/README.md)
+You've now learnt how to share data products to SAP Snowflake and mount data tables. Let us now continue to [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](../ex2/README.md)
 
