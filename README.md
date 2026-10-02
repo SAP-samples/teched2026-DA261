@@ -17,8 +17,8 @@ This hands-on workshop is designed for a data scientist/ analyst persona who wan
 
 - [Getting Started](exercises/ex0/)
 - [Exercise 1 - Share SAP-managed Data products from SAP BDC Catalog to SAP Snowflake Horizon Catalog](exercises/ex1/README.md)
-- [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows (using CoCo Agent)](exercises/ex2/README.md)
-- [Exercise 3 - Create and publish custom derived data product in SAP Snowflake to SAP BDC Catalog](exercises/ex3/README.md)
+- [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](exercises/ex2/README.md)
+- [Exercise 3 - Create and publish custom derived data product in SAP Snowflake to SAP BDC Catalog (using CoCo Agent)](exercises/ex3/README.md)
 - [Exercise 4 - Install custom data product in SAP Datasphere](exercises/ex4/README.md)
 - [Exercise 5 - Consume and model custom data product in SAP Datasphere](exercises/ex5/README.md)
 - [Exercise 6 - Create a report in SAP Analytics Cloud](exercises/ex6/README.md)

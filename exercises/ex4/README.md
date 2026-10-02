@@ -1,44 +1,51 @@
-# Exercise 1 - Exercise 1 Description
+# Exercise 4 - READ_ONLY, HANDS-ON: Install custom data product in SAP Datasphere
 
-In this exercise, we will create...
+We will now install the newly created and published data product in SAP Datasphere. 
+The installation process is governed by Data product data governance. This is a new capability that will be available in SAP Business Data Cloud (SAP BDC) on wave 2026.20, released in September 2026. This new capability introduces a structured, auditable process for controlling access to data products across your organization. Rather than relying on direct permissions and manual sharing, governance shifts access management to a request-based model — one where requests are tracked, reviewed, and recorded as access agreements. to learn more about the process, you can visit this great [blog](https://community.sap.com/t5/technology-blog-posts-by-sap/data-product-data-governance-in-sap-business-data-cloud/ba-p/14470556).
 
-## Exercise 1.1 Sub Exercise 1 Description
+## READ-ONLY: Setting up governance for this data producz
+For this exercise, let us proceed to install the data product that has been prepared beforehand. 
+In the Governance tab, an administrator or steward can set up the rules. For our case, we have already activated auto-approval on this data product. By doing this, anyone who wants to install the data product in SAP Datasphere does not need to wait for approval.
 
-After completing these steps you will have created...
-
-1. Click here.
-<br>![](/exercises/ex1/images/01_01_0010.png)
-
-2.	Insert this line of code.
-```abap
-response->set_text( |Hello World! | ). 
-```
+An administrator or data steward navigates to SAP BDC Cockpit > Governance > Data Product Management. Search for the data product and then, turn the flag **Auto-Approval** on.
+<br>![autoApproval](./images/autoApproval.png)
 
 
+Without auto-approval enabled, the steward must manually approve each data product installation request — a workflow suited for sensitive data products or those requiring compliance oversight.
 
-## Exercise 1.2 Sub Exercise 2 Description
+## HANDS-ON: Install Data Product in SAP Datasphere
+### Access Request creation and approval
+1. Navigate to SAP Datasphere.
+2. Open **Catalog & Marketplace** and search for the data product `V1 Workforce Transformation Intelligence`.
+<br>![openCatalog](./images/openCatalog.png)
 
-After completing these steps you will have...
+3. Click on **Add to Cart**.
+<br>![addToCart](./images/addToCart.png)
 
-1.	Enter this code.
-```abap
-DATA(lt_params) = request->get_form_fields(  ).
-READ TABLE lt_params REFERENCE INTO DATA(lr_params) WITH KEY name = 'cmd'.
-  IF sy-subrc <> 0.
-    response->set_status( i_code = 400
-                     i_reason = 'Bad request').
-    RETURN.
-  ENDIF.
+4. Proceed from the cart as shown below.
+<br>![proceed](./images/proceed.png)
 
-```
+5. Add the space name and comments. Check the Terms and Conditions checkbox after reading it. For this data product, there are no terms and conditions set up in the governance process. Then click **Send**.
+<br>![send](./images/send.png)
 
-2.	Click here.
-<br>![](/exercises/ex1/images/01_02_0010.png)
+6. The Access Request gets auto-approved.
+<br>![auto](./images/autoApproved.png)
 
+### Data Product Access
+1. Navigate to **Catalog & Marketplace**. Open **Data Product Access**.
+2. Navigate to the Data product in question and click on **Install Data Product**.
+<br>![access](./images/access.png)
+
+3. Select the Access Type as **Federation**. 
+> [!NOTE]
+> **DO NOT use Replication** for this data product. Select on Federation as the data product access type.
+<br>![federation](./images/federation.png)
+
+4. Click **Install**.
+<br>![install](./images/install.png)
+
+5. Once the installation is complete, you can view the data product remote tables in your space assigned to you. Open **Data Builder** and navigate to the space assigned to you. You can view that the tables are now shared from the Snowflake ingestion space into your custom space.
+<br>![success](./images/success.png)
 
 ## Summary
-
-You've now ...
-
-Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
-
+The custom data product has now been successfully created and installed! Continue to - [Exercise 5 - Create Datasphere Analytic Models](../ex5/README.md)

@@ -20,8 +20,8 @@ A leading enterprise seeks to harness workforce intelligence by integrating SAP 
 
 The exercises are as follows:
 - [Exercise 1 - Share SAP-managed Data products from SAP BDC Catalog to SAP Snowflake Horizon Catalog](../ex1/README.md)
-- [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows (using CoCo Agent)](../ex2/README.md)
-- [Exercise 3 - Create and publish custom derived data product in SAP Snowflake to SAP BDC Catalog](../ex3/README.md)
+- [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](../ex2/README.md)
+- [Exercise 3 - Create and publish custom derived data product in SAP Snowflake to SAP BDC Catalog using CoCo Agent](../ex3/README.md)
 - [Exercise 4 - Install custom data product in SAP Datasphere](../ex4/README.md)
 - [Exercise 5 - Consume and model custom data product in SAP Datasphere](../ex5/README.md)
 - [Exercise 6 - Create a report in SAP Analytics Cloud](../ex6/README.md)
