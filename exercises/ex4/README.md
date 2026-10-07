@@ -1,4 +1,4 @@
-# Exercise 4 - READ_ONLY, HANDS-ON: Install custom data product in SAP Datasphere
+# Exercise 4 - READ-ONLY, HANDS-ON: Install custom data product in SAP Datasphere
 
 We will now install the newly created and published data product in SAP Datasphere. 
 The installation process is governed by Data product data governance. This is a new capability that will be available in SAP Business Data Cloud (SAP BDC) on wave 2026.20, released in September 2026. This new capability introduces a structured, auditable process for controlling access to data products across your organization. Rather than relying on direct permissions and manual sharing, governance shifts access management to a request-based model — one where requests are tracked, reviewed, and recorded as access agreements. to learn more about the process, you can visit this great [blog](https://community.sap.com/t5/technology-blog-posts-by-sap/data-product-data-governance-in-sap-business-data-cloud/ba-p/14470556).
