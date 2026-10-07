@@ -9,7 +9,6 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 
 #### Prequisites
 - You have an BDC system landscape formation with **SAP SuccessFactors**. 
-- You need to have a SAP BDC Admin role for sharing
 - Following Data Products are already installed and available in the SAP Business Data Cloud catalog:
 
 | # | Data Package | Data Product |
@@ -67,6 +66,9 @@ For the mentioned nine data products, install each of the data products to SAP S
 4. An approval comment can be added and then click on **Approve**.
 <br/>![commentApprove](./images/commentApprove.png)
 
+> [!IMPORTANT]
+> For non-sensitive, low-fedelity data products, an Administrator or Data Steward could set up an Auto-approval access policy.
+
 ##### Install data products from SAP BDC Catalog into SAP Snowflake catalog: Finish Install by Requester
 1. The request recives a notification that the access request has been approved.
 <br/>![notificationModeller](./images/notificationModeller.png)
@@ -103,5 +105,5 @@ For the mentioned nine data products, install each of the data products to SAP S
 
 ## Summary
 
-You've now learnt how to share data products to SAP Snowflake and mount data tables. Let us now continue to [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](../ex2/README.md)
+You've now learnt how to install data products into SAP Snowflake and mount data tables. Let us now continue to [Exercise 2 - Consume SAP-managed Data product in Enterprise Snowflake and run ML Workflows](../ex2/README.md)
 
