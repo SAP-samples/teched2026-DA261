@@ -37,7 +37,7 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 ##### Install data products from SAP BDC Catalog into SAP Snowflake catalog: Create Access Request by Analyst role
 For the mentioned nine data products, install each of the data products to SAP Snowflake by following the steps below for each of them.
 1. Open **Catalog & Marketplace** > **Search** and search the name of the data product.
-<br/>![searchDP](./images/searchDP.png)
+<br/>![searchDP](./images/searchDp.png)
 
 2. Open the data product to be installed and click on **Add to Cart**.
 <br/>![addToCart](./images/addToCart.png)
