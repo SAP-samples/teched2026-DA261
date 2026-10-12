@@ -118,7 +118,7 @@ GROUP BY
 
 4. This SQL View designed to provide a 360-degree overview of employee readiness, learning activity, performance, skills development, and succession potential, combining individual employee data with workforce-level KPIs.
 
-´´´
+```
 /* V_Employee_Readiness
 Employee readiness, learning, performance, skills and succession KPIs
 */
@@ -193,7 +193,7 @@ LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_SUCCESSION_FEATURES" sf
 LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
     ON le."EMPLOYEE_ID" = tv."EMPLOYEE_ID"
 
-´´´
+```
 5. To find the full technical name of your tables, open the table and refer to the technical name. You can also drag and drop it from the `Repository` tab while building the view. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
 <br>![previewAndConfig](./images/previewAndConfig2.png)
 
@@ -211,7 +211,7 @@ LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.WORKFORCE_TRANSFORMATION_VELOCITY
 <br>![newSQL](./images/newSQL.png)
 
 4. This view combines employee, learning, performance, skills, career-development, succession, and workforce-transformation data into one analytical view. It helps assess individual employee readiness while also providing workforce-wide KPIs.
-´´´
+```
 /* V_READINESS_VS_FORECAST */
 SELECT
     t."DEPARTMENT",
@@ -260,7 +260,7 @@ GROUP BY
 
 ORDER BY t."DEPT_MILESTONE_STATUS", t."DEPARTMENT"
 
-´´´
+```
 5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
 <br>![previewAndConfig](./images/previewAndConfig3.png)
 
