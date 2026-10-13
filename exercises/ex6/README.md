@@ -13,8 +13,8 @@ A Story in SAP Analytics Cloud is a reporting and visualization tool that allows
 
 Before creating a story, ensure that:
 
-- You have access to SAP Analytics Cloud.
-- A data model is available and accessible (e.g. from SAP SuccessFactors Learning or a custom HR model in SAP Datasphere).
+- You have access to SAP Analytics Cloud. URL: (TODO)
+- A data model is available and accessible (built in the previous exercise)
 - You have the required permissions to create and save stories.
 - The data source contains the following dimensions and measures:
 
@@ -40,27 +40,24 @@ Before creating a story, ensure that:
 ### Step 1: Create a Canvas Story
 
 <img src="./images/SAC_Canvas.png" width="500"/><br/>
-
 1. From the SAC home screen, select **Stories**.
-2. Click **+ Create New Story**.
+2. Click **+Create New Story**.
 3. Click on **Canvas**.
 
 
 ### Step 2: Select a Model or Dataset
-
+1. Search for your Model or Dataset in the SAPDWC folder and select it. <br/>
 <img src="./images/Select_Datamodel.png" width="500"/><br/>
-### Search for your Model or Dataset in the SAPDWC folder and select it
 <img src="./images/Select_Datamodel_3.png" width="500"/><br/>
 
-Once the data is now connected to the story, Drag & drop **Chart** under **Widget** into the canvas.
-
+2. Once the data is now connected to the story, Drag & drop **Chart** under **Widget** into the canvas.<br/>
 <img src="./images/Select_Chart_Type.png" width="500"/><br/>
-In the next sections, we will create the KPI tiles and charts that make up the Executive Summary page.
+3. In the next sections, we will create the KPI tiles and charts that make up the Executive Summary page.<br/>
 
 
 ---
 
-## Section 1: KPI Tiles — Executive Summary
+## Create KPI Tiles — Executive Summary
 
 The top row of the dashboard contains **five Numeric Point (KPI) widgets** that display the most critical readiness metrics at a glance.
 
@@ -74,7 +71,7 @@ The top row of the dashboard contains **five Numeric Point (KPI) widgets** that 
 
 <img src="./images/NumericPoint.png" width="500"/><br/>
 > **Note:**
-> Repeat this insert step for each of the five KPI tiles below. Place them side by side in a single row across the full page width.
+> You will repeat this insert step for each of the five KPI tiles below. Place them side by side in a single row across the full page width. Let us see in the next steps how to create each of the KPI tiles.
 
 ---
 
@@ -323,8 +320,6 @@ Adding a reference line highlights the completion target clearly on the chart.
 ### Step 6: Save Changes
 
 Click **Save** to save changes.
-
-
 
 
 ---
