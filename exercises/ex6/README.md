@@ -344,3 +344,29 @@ To make the dashboard interactive, add **Input Controls** so viewers can filter 
 > Input Controls affect all charts on the page when **Linked Analysis** is enabled. To verify, select a chart, open the **Builder**, scroll to **Linked Analysis**, and confirm **All Widgets on Page** is checked.
 
 
+---
+
+## Explore Smart Insights in SAC
+
+To make the dashboard interactive, add **Smart Insights**. 
+Smart Insights is an augmented analytics feature in SAP Analytics Cloud that automatically explains why a specific data point or variance looks the way it does — surfacing the key drivers behind a value using statistical analysis, presented as a combination of natural language text and a supporting chart.
+
+<img src="./images/Smart_Insights.png" width="500"/><br/>
+
+1. Open a story in View or Edit mode.
+2. Click on a data point in a chart, a cell in a table, or a variance value.
+3. From the context menu or the footer, select Smart Insights.
+4. The Smart Insights panel opens on the right side, showing:
+      - A text explanation of the top contributors to that value
+      - A visualization (e.g. ranked bar chart) showing which dimension members are driving the result
+
+
+
+| Question | What Smart Insights surfaces | 
+|---|---|
+| What are the top contributors to this value? | Dimension members ranked by influence  | 
+| How has this changed?	 | Deviation from average or benchmark| 
+| What is pulling this value up or down?|Positive vs. negative contributors |
+| How is this calculated?|Breakdown of the measure's components|
+
+<img src="./images/Smart_Insights_View.png" width="500"/><br/>
