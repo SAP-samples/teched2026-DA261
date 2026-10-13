@@ -348,14 +348,16 @@ Smart Insights is an augmented analytics feature in SAP Analytics Cloud that aut
 
 <img src="./images/Smart_Insights.png" width="500"/><br/>
 
-1. Open a story in View or Edit mode.
-2. Click on a data point in a chart, a cell in a table, or a variance value.
-3. From the context menu or the footer, select Smart Insights.
+1. Open the story in View or Edit mode.
+2. Click on the Donut chart **Department Milestone**.
+3. From the context menu, select Smart Insights.
 4. The Smart Insights panel opens on the right side, showing:
       - A text explanation of the top contributors to that value
       - A visualization (e.g. ranked bar chart) showing which dimension members are driving the result
 
+<img src="./images/Smart_Insights_View.png" width="500"/><br/>
 
+>What It Tells You
 
 | Question | What Smart Insights surfaces | 
 |---|---|
@@ -364,4 +366,3 @@ Smart Insights is an augmented analytics feature in SAP Analytics Cloud that aut
 | What is pulling this value up or down?|Positive vs. negative contributors |
 | How is this calculated?|Breakdown of the measure's components|
 
-<img src="./images/Smart_Insights_View.png" width="500"/><br/>
