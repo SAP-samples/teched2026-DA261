@@ -191,8 +191,10 @@ LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_TRANSFORMATION_VELOCITY" t
     ON le."EMPLOYEE_ID" = tv."EMPLOYEE_ID"
 
 ```
+5. Validate the SQL and set the configuiration accordingly.
+<br>![previewAndConfig2](./images/previewAndConfig2.png)
 
-5. Save and deploy the view as `V_EMPLOYEE_READINESS`.
+6. Save and deploy the view as `V_EMPLOYEE_READINESS`. 
 <br>![deploy1](./images/deploy2.png)
 
 ### Create a combined Fact view: DEPARTMENT VS. FORECAST
