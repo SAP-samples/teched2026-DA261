@@ -37,7 +37,7 @@ The mapping is as follows:
 | VARIANT | Not supported | - |
 | OBJECT(...) \| ARRAY(...) \| MAP(...) | Not supported | - |
 | GEOMETRY \| GEOGRAPHY | Not supported | - |
-"title": "<USERNAME> Workforce Transformation Velocity Intelligence", "shortDescription": "ML-predicted employee readiness tiers and 12-month department learning trajectory vs transformation milestones.", "description": "Combined Snowflake Cortex ML output derived from 8 SAP SuccessFactors data products shared via SAP Business Data Cloud. ML.CLASSIFICATION scores each employee into transformation readiness tiers (READY_NOW, FAST_TRACK_3MO, NEEDS_COACHING, NEEDS_PROGRAM) with a composite velocity index (0-100). ML.FORECAST projects 12-month department-level learning completion trajectories against program milestone gates, classified as ON_TRACK, MARGINAL, POSSIBLE_IF_ACCELERATED, or WILL_MISS."
+"title": "<USERNAME> Workforce Transformation Velocity Intelligence", "shortDescription": "ML-predicted employee readiness tiers and 12-month department learning trajectory vs transformation milestones.", "description": "Combined Snowflake Cortex ML output derived from 9 SAP SuccessFactors data products shared via SAP Business Data Cloud. ML.CLASSIFICATION scores each employee into transformation readiness tiers (READY_NOW, FAST_TRACK_3MO, NEEDS_COACHING, NEEDS_PROGRAM) with a composite velocity index (0-100). ML.FORECAST projects 12-month department-level learning completion trajectories."
 USE WAREHOUSE SYSTEM$STREAMLIT_NOTEBOOK_WH. Grant all the privileges to the share that are required.
 ```
 
