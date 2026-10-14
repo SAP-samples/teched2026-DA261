@@ -45,7 +45,7 @@ Before creating a story, ensure that:
 
 
 ### Step 2: Select a Model or Dataset
-1. Search for your Model or Dataset in the SAPDWC folder and select it. <br/>
+1. Search for your Model or Dataset in the `SAPSRC` folder and select it. <br/>
 <img src="./images/Select_Datamodel.png" width="500"/><br/>
 <img src="./images/Select_Datamodel_3.png" width="500"/><br/>
 
