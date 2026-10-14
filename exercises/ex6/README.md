@@ -41,8 +41,7 @@ Before creating a story, ensure that:
 
 <img src="./images/SAC_Canvas.png" width="500"/><br/>
 1. From the SAC home screen, select **Stories**.
-2. Click **+Create New Story**.
-3. Click on **Canvas**.
+2. Click on **Canvas**.
 
 
 ### Step 2: Select a Model or Dataset
