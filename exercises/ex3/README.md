@@ -18,7 +18,7 @@ The tables are already ICEBERG VERSION=3 with the following configuration activa
 
 Create a new notebook that does the following:
 
-Create a share called <SHARENAME> and grant usage on the database/schema plus SELECT on all Iceberg tables within the schema. Attach the share to my existing SAP BDC zerocopy connector at DB_BDC_SANDBOX.PUBLIC.SAP_BDC_CONNECT_SANDBOX_BFSNOWFLAKE. Wrap it in a BEGIN/EXCEPTION block in case the share is already associated. Publish the data product using SYSTEM$SAP_PUBLISH_DATA_PRODUCT with a minimal CSN (version 1.0 interop, 2.0 schema). The data product should be titled "<USERNAME> Workforce Transformation Velocity Intelligence" with the description, short description, and metadata below. Generate the CSN definitions block mapping each table's columns to CDS types, marking key and notNull fields appropriately.
+Create a share called <SHARENAME> and grant usage on the database/schema plus SELECT on all Iceberg tables within the schema. Attach the share to my existing SAP BDC zerocopy connector at CONNECTORS.ZEROCOPY.DEFAULT_SAP_BDC_CONNECTOR. Wrap it in a BEGIN/EXCEPTION block in case the share is already associated. Publish the data product using SYSTEM$SAP_PUBLISH_DATA_PRODUCT with a minimal CSN (version 1.0 interop, 2.0 schema). Generate the CSN definitions block mapping each table's columns to CDS types, marking key and notNull fields appropriately.
 The mapping is as follows:
 | Snowflake Type | CDS Type | Notes |
 |---|---|---|
@@ -38,7 +38,7 @@ The mapping is as follows:
 | OBJECT(...) \| ARRAY(...) \| MAP(...) | Not supported | - |
 | GEOMETRY \| GEOGRAPHY | Not supported | - |
 "title": "<USERNAME> Workforce Transformation Velocity Intelligence", "shortDescription": "ML-predicted employee readiness tiers and 12-month department learning trajectory vs transformation milestones.", "description": "Combined Snowflake Cortex ML output derived from 8 SAP SuccessFactors data products shared via SAP Business Data Cloud. ML.CLASSIFICATION scores each employee into transformation readiness tiers (READY_NOW, FAST_TRACK_3MO, NEEDS_COACHING, NEEDS_PROGRAM) with a composite velocity index (0-100). ML.FORECAST projects 12-month department-level learning completion trajectories against program milestone gates, classified as ON_TRACK, MARGINAL, POSSIBLE_IF_ACCELERATED, or WILL_MISS."
-
+USE WAREHOUSE SYSTEM$STREAMLIT_NOTEBOOK_WH. Grant all the privileges to the share that are required.
 ```
 
 Add the above prompt edited with your personalized share name and data product name in the chat as shown below:
