@@ -261,7 +261,13 @@ ORDER BY t."DEPT_MILESTONE_STATUS", t."DEPARTMENT"
 5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
 <br>![previewAndConfig](./images/previewAndConfig3.png)
 
-6. Save and deploy the view as `V_READINESS_VS_FORECAST`.
+6. Convert all required attributes into Measures. This can be done by clicking on the Attribute and clicking `Convert to Measure`.
+<br>![convertToMeasure](./images/convertToMeasure.png)
+
+7. All but two attributes need to be converted as measures.
+<br>![convertMeasures](./images/convertMeasures.png)
+
+8. Save and deploy the view as `V_READINESS_VS_FORECAST`.
 <br>![deploy1](./images/deploy3.png)
 
 ### Create Integrated Analytic Model
