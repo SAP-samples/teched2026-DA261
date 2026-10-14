@@ -16,7 +16,7 @@ Without auto-approval enabled, the steward must manually approve each data produ
 ## HANDS-ON: Install Data Product in SAP Datasphere
 ### Access Request creation and approval
 1. Navigate to SAP Datasphere.
-2. Open **Catalog & Marketplace** and search for the data product `V1 Workforce Transformation Intelligence`.
+2. Open **Catalog & Marketplace** and search for the data product `Workforce Transformation Intelligence`.
 <br>![openCatalog](./images/openCatalog.png)
 
 3. Click on **Add to Cart**.
@@ -46,6 +46,8 @@ Without auto-approval enabled, the steward must manually approve each data produ
 
 5. Once the installation is complete, you can view the data product remote tables in your space assigned to you. Open **Data Builder** and navigate to the space assigned to you. You can view that the tables are now shared from the Snowflake ingestion space into your custom space.
 <br>![success](./images/success.png)
+
+6. Optionally, create a graphical view to view the data.
 
 ## Summary
 The custom data product has now been successfully created and installed! Continue to - [Exercise 5 - Create Datasphere Analytic Models](../ex5/README.md)

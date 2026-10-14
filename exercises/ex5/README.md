@@ -78,18 +78,18 @@ FROM (
         AVG(lr.LOWER_BOUND) OVER () AS AVG_LOWER_BOUND,
         AVG(lr.UPPER_BOUND) OVER () AS AVG_UPPER_BOUND
 
-    FROM "<INGESTIONSPACENAME>.<SHARENAME>:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
+    FROM "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
 
-    LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.FORECAST_VS_MILESTONES_SAP" fm
+    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.FORECAST_VS_MILESTONES_SAP" fm
         ON TO_VARCHAR(tv.DEPARTMENT) = TO_VARCHAR(fm.DEPARTMENT)
 
-    LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.TRANSFORMATION_MILESTONES" tm
+    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.TRANSFORMATION_MILESTONES" tm
         ON tv.DEPARTMENT = tm.DEPARTMENT
 
-    LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_LEARNING_MONTHLY_SERIES" ms
+    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LEARNING_MONTHLY_SERIES" ms
         ON tv.DEPARTMENT = ms.DEPARTMENT
 
-    LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.LEARNING_FORECAST_RAW_SAP" lr
+    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.LEARNING_FORECAST_RAW_SAP" lr
         ON tv.DEPARTMENT = lr.SERIES
 ) f
 
@@ -97,13 +97,10 @@ GROUP BY
     f.DEPARTMENT,
     f.DEPT_MILESTONE_STATUS
 ```
-5. To find the full technical name of your tables, open the table and refer to the technical name. You can also drag and drop it from the `Repository` tab while building the view.
-<br>![technicalName](./images/technicalName.png)
-
-6. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
+5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
 <br>![previewAndConfig](./images/previewAndConfig.png)
 
-7. Save and deploy the view as `V_DEPT_FORECASTS`.
+6. Save and deploy the view as `V_DEPT_FORECASTS`.
 <br>![deploy1](./images/deploy1.png)
 
 ### Create a Fact View: Employee Forecasts
@@ -179,25 +176,23 @@ SELECT
     SUM(CAST(le."HIGH_POTENTIAL_FLAG" AS INTEGER)) OVER()
         / COUNT(*) OVER()                              AS "HIPO_DENSITY"
 
-FROM "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_LABELED_EMPLOYEES" le
-LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_LEARNING_FEATURES" lf
+FROM "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LABELED_EMPLOYEES" le
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LEARNING_FEATURES" lf
     ON le."EMPLOYEE_ID" = lf."EMPLOYEE_ID"
-LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_CDP_FEATURES" cdp
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_CDP_FEATURES" cdp
     ON le."EMPLOYEE_ID" = cdp."EMPLOYEE_ID"
-LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_PERFORMANCE_FEATURES" pf
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_PERFORMANCE_FEATURES" pf
     ON le."EMPLOYEE_ID" = pf."EMPLOYEE_ID"
-LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_SKILLS_SIGNAL" ss
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_SKILLS_SIGNAL" ss
     ON le."EMPLOYEE_ID" = ss."EMPLOYEE_ID"
-LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.VW_SUCCESSION_FEATURES" sf
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_SUCCESSION_FEATURES" sf
     ON le."EMPLOYEE_ID" = sf."EMPLOYEE_ID"
-LEFT JOIN "<INGESTIONSPACENAME>.<SHARENAME>:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
     ON le."EMPLOYEE_ID" = tv."EMPLOYEE_ID"
 
 ```
-5. To find the full technical name of your tables, open the table and refer to the technical name. You can also drag and drop it from the `Repository` tab while building the view. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
-<br>![previewAndConfig](./images/previewAndConfig2.png)
 
-6. Save and deploy the view as `V_EMPLOYEE_READINESS`.
+5. Save and deploy the view as `V_EMPLOYEE_READINESS`.
 <br>![deploy1](./images/deploy2.png)
 
 ### Create a combined Fact view: DEPARTMENT VS. FORECAST
