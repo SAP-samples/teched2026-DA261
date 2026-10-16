@@ -24,12 +24,14 @@ This chapter describes the steps how Data Products in SAP Business Data Cloud (S
 | 9 | SAP SuccessFactors Employee Central Data Products | WorkforcePerson |
 
 #### Guided Tour
-1. Use the Clickthrough below to get an impression of Installing data product from SAP BDC Catalog into SAP Snowflake.
+1. Use the Clickthrough below to get an impression of Installing data product from SAP BDC Catalog into SAP Snowflake.<br/>
 
-[![Open Clickthrough](https://img.shields.io/badge/▶-Open%20Interactive%20Clickthrough-blue?style=for-the-badge)](./bdc-snowflake-clickthrough.html)
+> Tip: Right-click → Open in new tab for the best experience.
+[![Open Clickthrough](https://img.shields.io/badge/▶-Open%20Interactive%20Clickthrough-blue?style=for-the-badge)](https://bdc-workshop.cfapps.eu01.hana.ondemand.com/bdc-snowflake-clickthrough.html)
 
-2. Use the clickthrough below to get an impression of mounting data product tables on SAP Snowflake
+2. Use the clickthrough below to get an impression of mounting data product tables on SAP Snowflake<br/>
 
+> Tip: Right-click → Open in new tab for the best experience.
 [![Open Clickthrough](https://img.shields.io/badge/▶-Open%20Interactive%20Clickthrough-blue?style=for-the-badge)](https://tour-viewer.platform.saleo.io/7a84b309-34dc-468d-8203-34a9b494803e)
 
 

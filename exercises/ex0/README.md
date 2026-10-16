@@ -25,7 +25,6 @@ The exercises are as follows:
 - [Exercise 4 - Install custom data product in SAP Datasphere](../ex4/README.md)
 - [Exercise 5 - Consume and model custom data product in SAP Datasphere](../ex5/README.md)
 - [Exercise 6 - Create a report in SAP Analytics Cloud](../ex6/README.md)
-- [Exercise 7 - Use Joule Narrative Agent to gather insights](../ex7/README.md)
 
 ## Access to Tenants
 URLs

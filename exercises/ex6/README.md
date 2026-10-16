@@ -365,3 +365,5 @@ Smart Insights is an augmented analytics feature in SAP Analytics Cloud that aut
 | What is pulling this value up or down?|Positive vs. negative contributors |
 | How is this calculated?|Breakdown of the measure's components|
 
+## Congratulations!
+You have now run an end-to-end use case of converting business data into valuable insights.
