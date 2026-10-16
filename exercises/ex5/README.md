@@ -128,6 +128,7 @@ LEFT JOIN (
 4. Convert the following attributes into measures with the appropriate aggregation (22 Measures in total): <br/>
 <br>![dataBuilder](./images/changeToMeasure.png)<br/>
 
+```
 <table>
   <tr>
     <th>Attribute Name</th>
@@ -218,7 +219,7 @@ LEFT JOIN (
     <td>MAX</td>
   </tr>
 </table>
-
+```
 <br/>
 
 5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
