@@ -11,10 +11,10 @@ We will first create an integrated Fact view and then create an Analytic model o
 In the Fact, we will create some aggregated KPIs to offer insights to a CHRO.
 
 We have 12 tables to create an integrated view. For this use case, we will use the following tables:
-- WORKFORCE_READINESS_SCORES_SAP
-- WORKFORCE_TRANSFORMATION_VELOCITY
-- VW_LABELED_EMPLOYEES
-- FORECAST_VS_MILESTONES_SAP
+- `WORKFORCE_READINESS_SCORES_SAP`
+- `WORKFORCE_TRANSFORMATION_VELOCITY`
+- `VW_LABELED_EMPLOYEES`
+- `FORECAST_VS_MILESTONES_SAP`
 
 There are other KPIs that can be derived from the other tables as well. But for our need, the four tables above are sufficient.
 
