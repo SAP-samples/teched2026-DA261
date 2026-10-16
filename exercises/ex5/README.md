@@ -10,6 +10,14 @@ In this exercise, we will create an integrated data model. We will use the data 
 We will first create an integrated Fact view and then create an Analytic model on top of it.
 In the Fact, we will create some aggregated KPIs to offer insights to a CHRO.
 
+We have 12 tables to create an integrated view. For this use case, we will use the following tables:
+- WORKFORCE_READINESS_SCORES_SAP
+- WORKFORCE_TRANSFORMATION_VELOCITY
+- VW_LABELED_EMPLOYEES
+- FORECAST_VS_MILESTONES_SAP
+
+There are other KPIs that can be derived from the other tables as well. But for our need, the four tables above are sufficient.
+
 ### Create a Fact View: Department Forecasts
 1. Open **Data Builder** in SAP Datasphere (TODO)
 <br>![dataBuilder](./images/dataBuilder.png)
@@ -17,258 +25,207 @@ In the Fact, we will create some aggregated KPIs to offer insights to a CHRO.
 2. Search for the space and open it. Your space will have your username Eg. `ACXXXXXXXXX`
 <br>![searchSpace](./images/searchSpace.png)
 
-3. Create a new SQL view.
+3. Create a new SQL view with the code below. The share name can be replaced with your own share name if you replace your own data product for the fact view.
 <br>![newSQL](./images/newSQL.png)
 
-4. This SQL view is department forecast data. It is the department-level target aggregation into one view that summarizes workforce transformation progress by department and milestone status.
-Adjust the SQL Query below to add the correct technical name of your data product tables.
+
 ```
-/* Consolidated Department Forecasts and Targets */
 
 SELECT
-    f.DEPARTMENT,
-    f.DEPT_MILESTONE_STATUS,
+    /* ---------- KEY ---------- */
+    s.EMPLOYEE_ID                                                     AS EMPLOYEE_ID,
 
-     MAX(
-        CAST(f.DEPT_PROJECTED_COMPLETIONS_12MO AS DECIMAL(18, 2))
-    ) AS DEPT_PROJECTED_COMPLETIONS_12MO,
-        
+    /* ---------- DIMENSIONS / ATTRIBUTES ---------- */
+    s.DEPARTMENT                                                      AS DEPARTMENT,
+    TO_NVARCHAR(s.DEPARTMENT)                                         AS DEPARTMENT_CODE,
+    s.JOB_TITLE                                                       AS JOB_TITLE,
+    s.READINESS_TIER                                                  AS READINESS_TIER,
+    CASE s.READINESS_TIER
+        WHEN 'READY_NOW'      THEN 'Ready Now'
+        WHEN 'FAST_TRACK_3MO' THEN 'Fast Track (3 months)'
+        WHEN 'NEEDS_COACHING' THEN 'Needs Coaching'
+        WHEN 'NEEDS_PROGRAM'  THEN 'Needs Structured Program'
+        ELSE 'Unclassified'
+    END                                                              AS READINESS_TIER_LABEL,
+    CASE s.READINESS_TIER
+        WHEN 'READY_NOW'      THEN 1
+        WHEN 'FAST_TRACK_3MO' THEN 2
+        WHEN 'NEEDS_COACHING' THEN 3
+        WHEN 'NEEDS_PROGRAM'  THEN 4
+        ELSE 9
+    END                                                              AS READINESS_TIER_RANK,
+    CASE s.READINESS_TIER
+        WHEN 'READY_NOW'      THEN 'G'
+        WHEN 'FAST_TRACK_3MO' THEN 'G'
+        WHEN 'NEEDS_COACHING' THEN 'A'
+        WHEN 'NEEDS_PROGRAM'  THEN 'R'
+        ELSE 'A'
+    END                                                              AS READINESS_RAG_COLOR,
+    le.LEARNING_VELOCITY_TREND                                       AS LEARNING_VELOCITY_TREND,
+    v.DEPT_MILESTONE_STATUS                                          AS DEPT_MILESTONE_STATUS,
 
-    SUM(f.FM_REQUIRED_COMPLETIONS)
-        AS total_required_completions,
+    /* ---------- COUNTING MEASURES ---------- */
+    1                                                                AS HEADCOUNT,
+    CASE WHEN s.READINESS_TIER IN ('READY_NOW','FAST_TRACK_3MO') THEN 1 ELSE 0 END AS IS_READY,
+    CASE WHEN s.READINESS_TIER = 'READY_NOW'      THEN 1 ELSE 0 END  AS IS_READY_NOW,
+    CASE WHEN s.READINESS_TIER = 'FAST_TRACK_3MO' THEN 1 ELSE 0 END  AS IS_FAST_TRACK,
+    CASE WHEN s.READINESS_TIER = 'NEEDS_COACHING' THEN 1 ELSE 0 END  AS IS_NEEDS_COACHING,
+    CASE WHEN s.READINESS_TIER = 'NEEDS_PROGRAM'  THEN 1 ELSE 0 END  AS IS_NEEDS_PROGRAM,
+    le.HIGH_POTENTIAL_FLAG                                           AS IS_HIGH_POTENTIAL,
+    CASE WHEN s.READINESS_TIER = 'NEEDS_COACHING'
+              AND le.LATEST_PERF_RATING >= 3
+              AND s.READINESS_VELOCITY_INDEX < 0
+         THEN 1 ELSE 0 END                                           AS IS_STALLING_HIGH_PERFORMER,
 
-    COUNT(DISTINCT f.FM_MILESTONE_NAME)
-        AS milestone_count,
+    /* ---------- PROBABILITY MEASURES ---------- */
+    s.P_READY_NOW                                                    AS P_READY_NOW,
+    s.P_FAST_TRACK                                                   AS P_FAST_TRACK,
+    s.P_NEEDS_COACHING                                               AS P_NEEDS_COACHING,
+    s.P_NEEDS_PROGRAM                                                AS P_NEEDS_PROGRAM,
 
-    SUM(f.COMPLETIONS)
-        AS actual_completions_to_date,
+    /* ---------- BEHAVIOURAL MEASURES (employee) ---------- */
+    s.READINESS_VELOCITY_INDEX                                       AS READINESS_VELOCITY_INDEX,
+    le.DIGITAL_PROGRAM_COMPLETION_RATE                               AS DIGITAL_PROGRAM_COMPLETION_RATE,
+    le.LEARNING_HOURS_LAST_6MO                                       AS LEARNING_HOURS_LAST_6MO,
+    le.DAYS_SINCE_LAST_LEARNING                                      AS DAYS_SINCE_LAST_LEARNING,
+    le.CDP_MILESTONE_COMPLETION_RATE                                 AS CDP_MILESTONE_COMPLETION_RATE,
+    le.ACTIVE_DEV_GOAL_COUNT                                         AS ACTIVE_DEV_GOAL_COUNT,
+    le.GOAL_COMPLETION_RATE                                          AS GOAL_COMPLETION_RATE,
+    le.LATEST_PERF_RATING                                            AS LATEST_PERF_RATING,
+    le.PERF_RATING_DELTA                                             AS PERF_RATING_DELTA,
+    le.SKILL_PROFILE_UPDATES_6MO                                     AS SKILL_PROFILE_UPDATES_6MO,
+    le.READINESS_LEVEL_DELTA_12MO                                    AS READINESS_LEVEL_DELTA_12MO,
 
-    SUM(f.ACTIVE_LEARNERS)
-        AS total_active_learners,
-
-    ROUND(SUM(f.TOTAL_CREDIT_HOURS), 1)
-        AS total_credit_hours
-
-FROM (
+    /* ---------- DEPARTMENT TRAJECTORY MEASURES (joined context) ---------- */
+    v.DEPT_PROJECTED_COMPLETIONS_12MO                                AS DEPT_PROJECTED_COMPLETIONS_12MO,
+    df.WORST_MILESTONE_GAP                                           AS DEPT_WORST_MILESTONE_GAP,
+    df.DEPT_AT_RISK_EVEN_OPTIMISTIC                                  AS DEPT_AT_RISK_EVEN_OPTIMISTIC,
+    df.DEPT_ANY_MILESTONE_MISSED                                     AS DEPT_ANY_MILESTONE_MISSED,
+    CAST(df.WORST_MILESTONE_GAP AS INTEGER) AS MILESTONE_GAP,
+    df.PROJECTED_COMPLETIONS_SUM,
+    df.REQUIRED_COMPLETIONS_SUM
+FROM "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_READINESS_SCORES_SAP" s
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_TRANSFORMATION_VELOCITY" v
+       ON v.EMPLOYEE_ID = s.EMPLOYEE_ID
+LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LABELED_EMPLOYEES" le
+       ON le.EMPLOYEE_ID = s.EMPLOYEE_ID
+LEFT JOIN (
+    /* Department-level roll-up of the forecast-vs-milestone fact
+       (grain dept x month x milestone -> dept), now as an inline sub-select. */
     SELECT
-        tv.DEPARTMENT,
-        tv.DEPT_MILESTONE_STATUS,
-        tv.DEPT_PROJECTED_COMPLETIONS_12MO,
-
-        fm.FORECAST_MONTH,
-        fm.PROJECTED_COMPLETIONS,
-        AVG(fm.LOWER_90) OVER () AS AVG_LOWER_90,
-        AVG(fm.UPPER_90) OVER () AS AVG_UPPER_90,
-        fm.MILESTONE_NAME AS FM_MILESTONE_NAME,
-        fm.REQUIRED_COMPLETIONS AS FM_REQUIRED_COMPLETIONS,
-        fm.MILESTONE_STATUS,
-
-        tm.MILESTONE_DATE,
-        tm.MILESTONE_NAME AS TM_MILESTONE_NAME,
-        tm.REQUIRED_COMPLETIONS AS TM_REQUIRED_COMPLETIONS,
-
-        ms.MONTH_DATE,
-        ms.COMPLETIONS,
-        ms.ACTIVE_LEARNERS,
-        ms.TOTAL_CREDIT_HOURS,
-
-        lr.SERIES,
-        lr.TS,
-        lr.FORECAST,
-        AVG(lr.LOWER_BOUND) OVER () AS AVG_LOWER_BOUND,
-        AVG(lr.UPPER_BOUND) OVER () AS AVG_UPPER_BOUND
-
-    FROM "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
-
-    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.FORECAST_VS_MILESTONES_SAP" fm
-        ON TO_VARCHAR(tv.DEPARTMENT) = TO_VARCHAR(fm.DEPARTMENT)
-
-    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.TRANSFORMATION_MILESTONES" tm
-        ON tv.DEPARTMENT = tm.DEPARTMENT
-
-    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LEARNING_MONTHLY_SERIES" ms
-        ON tv.DEPARTMENT = ms.DEPARTMENT
-
-    LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.LEARNING_FORECAST_RAW_SAP" lr
-        ON tv.DEPARTMENT = lr.SERIES
-) f
-
-GROUP BY
-    f.DEPARTMENT,
-    f.DEPT_MILESTONE_STATUS
-```
-5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
-<br>![previewAndConfig](./images/previewAndConfig.png)
-
-6. Save and deploy the view as `V_DEPT_FORECASTS`.
-<br>![deploy1](./images/deploy1.png)
-
-### Create a Fact View: Employee Forecasts
-1. Open **Data Builder** in SAP Datasphere (TODO)
-<br>![dataBuilder](./images/dataBuilder.png)
-
-2. Search for the space and open it. Your space will have your username Eg. `ACXXXXXXXXX`
-<br>![searchSpace](./images/searchSpace.png)
-
-3. Create a new SQL view.
-<br>![newSQL](./images/newSQL.png)
-
-4. This SQL View designed to provide a 360-degree overview of employee readiness, learning activity, performance, skills development, and succession potential, combining individual employee data with workforce-level KPIs.
+        DEPARTMENT                                                     AS DEPARTMENT,
+        MIN(PROJECTED_COMPLETIONS - REQUIRED_COMPLETIONS)              AS WORST_MILESTONE_GAP,
+        MAX(CASE WHEN UPPER_90 < REQUIRED_COMPLETIONS THEN 1 ELSE 0 END)        AS DEPT_AT_RISK_EVEN_OPTIMISTIC,
+        MAX(CASE WHEN PROJECTED_COMPLETIONS < REQUIRED_COMPLETIONS THEN 1 ELSE 0 END) AS DEPT_ANY_MILESTONE_MISSED,
+        SUM(PROJECTED_COMPLETIONS) as PROJECTED_COMPLETIONS_SUM,
+        SUM(REQUIRED_COMPLETIONS) as REQUIRED_COMPLETIONS_SUM
+    FROM "SNOWFLAKE8FBCB2C2.da261_share:v1.FORECAST_VS_MILESTONES_SAP"
+    GROUP BY DEPARTMENT
+) df
+       ON df.DEPARTMENT = s.DEPARTMENT;
 
 ```
-/* V_Employee_Readiness
-Employee readiness, learning, performance, skills and succession KPIs
-*/
-SELECT
-    -- Labeled Employees (hub table)
-    le."EMPLOYEE_ID",
-    le."READINESS_TIER_LABEL",
-    le."LEARNING_VELOCITY_TREND",
-    le."HIGH_POTENTIAL_FLAG",
-    le."LEARNING_HOURS_LAST_6MO"         AS "LE_LEARNING_HOURS_LAST_6MO",
-    le."ACTIVE_DEV_GOAL_COUNT"           AS "LE_ACTIVE_DEV_GOAL_COUNT",
-    le."SKILL_PROFILE_UPDATES_6MO"       AS "LE_SKILL_PROFILE_UPDATES_6MO",
+4. Convert the following attributes into measures with the appropriate aggregation (22 Measures in total): <br/>
+<table>
+  <tr>
+    <th>Attribute Name</th>
+    <th>Agreegation</th>
+  </tr>
+  <tr>
+    <td>HEADCOUNT</td>
+    <td>SUM</td>
+  </tr>
+  <tr>
+    <td>IS_READY</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>IS_READY_NOW</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>IS_FAST_TRACK</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>IS_NEEDS_COACHING</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>IS_NEEDS_PROGRAM</td>
+    <td>SUM</td>
+  </tr>
+     <tr>
+    <td>IS_HIGH_POTENTIAL</td>
+    <td>SUM</td>
+  </tr>
+       <tr>
+    <td>READINESS_VELOCITY_INDEX</td>
+    <td>SUM</td>
+  </tr>
+    <tr>
+    <td>DIGITAL_PROGRAM_COMPLETION_RATE</td>
+    <td>SUM</td>
+  </tr>
+    <tr>
+    <td>LEARNING_HOURS_LAST_6MO</td>
+    <td>SUM</td>
+  </tr>
+    <tr>
+    <td>DAYS_SINCE_LAST_LEARNING</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>CDP_MILESTONE_COMPLETION_RATE</td>
+    <td>SUM</td>
+  </tr>
+  <tr>
+    <td>ACTIVE_DEV_GOAL_TIME</td>
+    <td>SUM</td>
+  </tr>
+  <tr>
+    <td>GOAL_COMPLETION_RATE</td>
+    <td>SUM</td>
+  </tr>
+    <tr>
+    <td>LATEST_PERF_RATING</td>
+    <td>SUM</td>
+  </tr>
+    <tr>
+    <td>DEPT_PROJECTED_COMPLETIONS_12MO</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>DEPT_AT_RISK_EVEN_OPTIMISTIC</td>
+    <td>SUM</td>
+  </tr>
+    <tr>
+    <td>DEPT_ANY_MILESTONE_MISSED</td>
+    <td>SUM</td>
+  </tr>
+   <tr>
+    <td>MILESTONE_GAP</td>
+    <td>MAX</td>
+  </tr>
+   <tr>
+    <td>PROJECTED_COMPLETIONS_SUM</td>
+    <td>MAX</td>
+  </tr>
+   <tr>
+    <td>REQUIRED_COMPLETIONS_SUM</td>
+    <td>MAX</td>
+  </tr>
+</table>
 
-    -- Department (from Transformation Velocity)
-    tv."DEPARTMENT",
+<br/>
 
-    -- Learning Features
-    lf."HOURS_RECENT_3MO",
-    lf."HOURS_PRIOR_3MO",
-
-    -- CDP Features
-    cdp."CDP_MILESTONE_COMPLETION_RATE"   AS "CDP_COMPLETION_RATE",
-    AVG(cdp."ACTIVE_DEV_GOAL_COUNT") OVER() AS "AVG_CDP_ACTIVE_GOALS",
-
-    -- Performance Features
-    AVG(pf."LATEST_PERF_RATING") OVER()  AS "PF_LATEST_PERF_RATING",
-    AVG(pf."PERF_RATING_DELTA") OVER()   AS "PF_PERF_RATING_DELTA",
-    pf."GOAL_COMPLETION_RATE"            AS "AVG_PF_GOAL_COMPLETION_RATE",
-
-    -- Skills Signal
-    ss."SKILL_PROFILE_UPDATES_6MO"       AS "SS_SKILL_PROFILE_UPDATES_6MO",
-
-    -- Succession Features
-    sf."CURRENT_READINESS_LEVEL",
-    AVG(sf."READINESS_LEVEL_DELTA_12MO") OVER() AS "SF_READINESS_LEVEL_DELTA_12MO",
-    sf."HIGH_POTENTIAL_FLAG"             AS "SF_HIGH_POTENTIAL_FLAG",
-
-    -- Transformation Velocity
-    tv."DEPT_MILESTONE_STATUS",
-    tv."DEPT_PROJECTED_COMPLETIONS_12MO",
-
-    -- Averages (Labeled Employees)
-    AVG(le."DIGITAL_PROGRAM_COMPLETION_RATE") OVER() AS "AVG_LE_DIGITAL_PROGRAM_COMPLETION_RATE",
-    AVG(le."CDP_MILESTONE_COMPLETION_RATE")   OVER() AS "AVG_LE_CDP_MILESTONE_COMPLETION_RATE",
-    AVG(le."READINESS_LEVEL_DELTA_12MO")      OVER() AS "AVG_LE_READINESS_LEVEL_DELTA_12MO",
-    AVG(le."LATEST_PERF_RATING")              OVER() AS "AVG_LE_LATEST_PERF_RATING",
-    AVG(le."PERF_RATING_DELTA")               OVER() AS "AVG_LE_PERF_RATING_DELTA",
-    AVG(le."GOAL_COMPLETION_RATE")            OVER() AS "AVG_LE_GOAL_COMPLETION_RATE",
-    AVG(le."DAYS_SINCE_LAST_LEARNING")        OVER() AS "AVG_LE_DAYS_SINCE_LAST_LEARNING",
-
-    -- Aggregated KPIs
-    AVG(tv."READINESS_VELOCITY_INDEX") OVER()        AS "AVG_TV_VELOCITY_INDEX",
-    SUM(tv."DEPT_PROJECTED_COMPLETIONS_12MO") OVER() AS "TOTAL_DEPT_PROJECTED_COMPLETIONS",
-    SUM(lf."HOURS_RECENT_3MO") OVER()                AS "TOTAL_HOURS_RECENT_3MO",
-    SUM(lf."HOURS_PRIOR_3MO") OVER()                 AS "TOTAL_HOURS_PRIOR_3MO",
-    SUM(lf."HOURS_RECENT_3MO") OVER()
-        / NULLIF(SUM(lf."HOURS_PRIOR_3MO") OVER(), 0) AS "LEARNING_MOMENTUM_RATIO",
-    SUM(CAST(le."HIGH_POTENTIAL_FLAG" AS INTEGER)) OVER()
-        / COUNT(*) OVER()                              AS "HIPO_DENSITY"
-
-FROM "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LABELED_EMPLOYEES" le
-LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_LEARNING_FEATURES" lf
-    ON le."EMPLOYEE_ID" = lf."EMPLOYEE_ID"
-LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_CDP_FEATURES" cdp
-    ON le."EMPLOYEE_ID" = cdp."EMPLOYEE_ID"
-LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_PERFORMANCE_FEATURES" pf
-    ON le."EMPLOYEE_ID" = pf."EMPLOYEE_ID"
-LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_SKILLS_SIGNAL" ss
-    ON le."EMPLOYEE_ID" = ss."EMPLOYEE_ID"
-LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.VW_SUCCESSION_FEATURES" sf
-    ON le."EMPLOYEE_ID" = sf."EMPLOYEE_ID"
-LEFT JOIN "SNOWFLAKE8FBCB2C2.da261_share:v1.WORKFORCE_TRANSFORMATION_VELOCITY" tv
-    ON le."EMPLOYEE_ID" = tv."EMPLOYEE_ID"
-
-```
-5. Validate the SQL and set the configuiration accordingly.
-<br>![previewAndConfig2](./images/previewAndConfig2.png)
-
-6. Save and deploy the view as `V_EMPLOYEE_READINESS`. 
-<br>![deploy1](./images/deploy2.png)
-
-### Create a combined Fact view: DEPARTMENT VS. FORECAST
-1. Open **Data Builder** in SAP Datasphere (TODO)
-<br>![dataBuilder](./images/dataBuilder.png)
-
-2. Search for the space and open it. Your space will have your username Eg. `ACXXXXXXXXX`
-<br>![searchSpace](./images/searchSpace.png)
-
-3. Create a new SQL view.
-<br>![newSQL](./images/newSQL.png)
-
-4. This view combines employee, learning, performance, skills, career-development, succession, and workforce-transformation data into one analytical view. It helps assess individual employee readiness while also providing workforce-wide KPIs.
-```
-/* V_READINESS_VS_FORECAST */
-SELECT
-    t."DEPARTMENT",
-    t."DEPT_MILESTONE_STATUS",
-
-    -- Forecast targets
-    t."DEPT_PROJECTED_COMPLETIONS_12MO"                                                AS projected_completions_12mo,
-    t."total_required_completions",
-    t."milestone_count",
-    t."actual_completions_to_date",
-    t."total_active_learners",
-    t."total_credit_hours",
-
-    -- Employee readiness distribution
-    COUNT(e."EMPLOYEE_ID")                                                             AS total_employees,
-    SUM(CASE WHEN e."READINESS_TIER_LABEL" = 'READY_NOW'      THEN 1 ELSE 0 END)     AS ready_now,
-    SUM(CASE WHEN e."READINESS_TIER_LABEL" = 'FAST_TRACK'     THEN 1 ELSE 0 END)     AS fast_track,
-    SUM(CASE WHEN e."READINESS_TIER_LABEL" = 'NEEDS_COACHING' THEN 1 ELSE 0 END)     AS needs_coaching,
-    SUM(CASE WHEN e."READINESS_TIER_LABEL" = 'NEEDS_PROGRAM'  THEN 1 ELSE 0 END)     AS needs_program,
-    MAX(e."AVG_TV_VELOCITY_INDEX")                                               AS avg_velocity,
-    SUM(CASE WHEN e."HIGH_POTENTIAL_FLAG" = 1 THEN 1 ELSE 0 END)                     AS high_potentials,
-
-    -- Derived ratios
-    ROUND(
-        AVG(
-            COUNT(CASE WHEN e."READINESS_TIER_LABEL" = 'READY_NOW' THEN 1 END) * 100.0
-            / NULLIF(COUNT(e."EMPLOYEE_ID"), 0)
-            ) OVER(), 1)                     AS avg_pct_ready_now,
-    ROUND(
-        COUNT(CASE WHEN e."READINESS_TIER_LABEL" IN ('READY_NOW', 'FAST_TRACK') THEN 1 END)
-        * 100.0 / NULLIF(COUNT(e."EMPLOYEE_ID"), 0), 1)                               AS pct_on_track
-
-FROM "V_DEPT_FORECASTS" t
-LEFT JOIN "V_EMPLOYEE_READINESS" e
-    ON t."DEPARTMENT" = e."DEPARTMENT"
-
-GROUP BY
-    t."DEPARTMENT",
-    t."DEPT_MILESTONE_STATUS",
-    t."DEPT_PROJECTED_COMPLETIONS_12MO",
-    t."total_required_completions",
-    t."milestone_count",
-    t."actual_completions_to_date",
-    t."total_active_learners",
-    t."total_credit_hours"
-
-ORDER BY t."DEPT_MILESTONE_STATUS", t."DEPARTMENT"
-
-```
 5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
 <br>![previewAndConfig](./images/previewAndConfig3.png)
 
-6. Convert all required attributes into Measures. This can be done by clicking on the Attribute and clicking `Convert to Measure`.
-<br>![convertToMeasure](./images/convertToMeasure.png)
-
-7. All but two attributes need to be converted as measures.
-<br>![convertMeasures](./images/convertMeasures.png)
-
-8. Save and deploy the view as `V_READINESS_VS_FORECAST`.
+6. Save and deploy the view as `V_READINESS_VS_FORECAST`.
 <br>![deploy1](./images/deploy3.png)
+
+
 
 ### Create Integrated Analytic Model
 1. Open **Data Builder** in SAP Datasphere (TODO)
