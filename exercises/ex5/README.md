@@ -125,6 +125,7 @@ LEFT JOIN (
        ON df.DEPARTMENT = s.DEPARTMENT;
 
 ```
+
 4. Convert the following attributes into measures with the appropriate aggregation (22 Measures in total): <br/>
 <br>![dataBuilder](./images/changeToMeasure.png)<br/>
 
