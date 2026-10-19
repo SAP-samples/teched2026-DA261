@@ -7,9 +7,9 @@ We will use the CoCo agent for the creation of the data product to be published 
 For Snowflake, we have out-of-the-box Cortex Code skills included to package and publish a custom data product. To create a data product to publish to BDC, use `/manage-zerocopy-sapbdc`. The full documentation can be found [here](https://docs.snowflake.com/en/user-guide/data-integration/zero-copy/sap-sql/publish-data)
 
 Here is the prompt, please adjust the your name object names and the name of the data product that you want to publish:
-<SCHEMANAME>: SCHEMA_<YOUR USERNAME>
-<SHARENAME> : TECHED_DA261_SHARE_<YOUR USERNAME>
-<USERNAME>: YOUR_USERNAME
+`<SCHEMANAME>`: SCHEMA_`<YOUR USERNAME>`
+`<SHARENAME>` : TECHED_DA261_SHARE_`<YOUR USERNAME>`
+`<USERNAME>`: YOUR_USERNAME
 
 ```
 /manage-zerocopy-sapbdc I have 12 tables in TECHED_DA261.<SCHEMANAME> that I need to publish as a data product back to SAP BDC via the zerocopy connector. Use all the tables in TECHED_DA261.<SCHEMANAME>
