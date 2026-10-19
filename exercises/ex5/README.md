@@ -22,7 +22,7 @@ There are other KPIs that can be derived from the other tables as well. But for 
 1. Open **Data Builder** in SAP Datasphere (TODO)
 <br>![dataBuilder](./images/dataBuilder.png)
 
-2. Search for the space and open it. Your space will have your username Eg. `ACXXXXXXXXX`
+2. Search for the space and open it. Your space will have your username Eg. `TACXXXXXXXXX`
 <br>![searchSpace](./images/searchSpace.png)
 
 3. Create a new SQL view with the code below. The share name can be replaced with your own share name if you replace your own data product for the fact view.
@@ -126,7 +126,10 @@ LEFT JOIN (
 
 ```
 
-4. Convert the following attributes into measures with the appropriate aggregation (22 Measures in total): <br/>
+4. Validate the SQL and preview the results. Change configuration of the view. It is important to validate SQL and set the semantic usage to `Fact` before the next step.
+<br>![previewAndConfig](./images/previewAndConfig3.png)
+
+5. Convert the following attributes into measures with the appropriate aggregation (22 Measures in total): <br/>
 <br>![dataBuilder](./images/changeToMeasure.png)<br/>
 
 <table>
@@ -222,8 +225,7 @@ LEFT JOIN (
 
 <br/>
 
-5. Validate the SQL and preview the results. Change configuration of the SQL view before saving.
-<br>![previewAndConfig](./images/previewAndConfig3.png)
+
 
 6. Save and deploy the view as `V_READINESS_VS_FORECAST`.
 <br>![deploy1](./images/deploy3.png)
