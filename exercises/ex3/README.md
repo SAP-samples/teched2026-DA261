@@ -1,5 +1,7 @@
 # Exercise 3- HANDS-ON: Create and publish custom derived data product in Enterprise Snowflake using CoCo Agent
 
+Snowflake CoCo Agent (Cortex Code) is Snowflake’s native AI-powered coding and data agent built to automate data engineering, analytics, and software workflows directly inside Snowflake.
+
 We will use the CoCo agent for the creation of the data product to be published on the SAP BDC Catalog. In Snowflake, you can access CoCo as shown below. You can create a data product using prompts.
 
 <br>![access CoCo](./images/accessCoco.png)
