@@ -15,7 +15,7 @@ Without auto-approval enabled, the steward must manually approve each data produ
 
 ## HANDS-ON: Install Data Product in SAP Datasphere
 ### Access Request creation and approval
-1. Navigate to SAP Datasphere.
+1. Navigate to [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/).
 2. Open **Catalog & Marketplace** and search for the data product `Workforce Transformation Intelligence`.
 <br>![openCatalog](./images/openCatalog.png)
 

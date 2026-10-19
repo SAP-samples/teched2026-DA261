@@ -27,6 +27,10 @@ The exercises are as follows:
 - [Exercise 6 - Create a report in SAP Analytics Cloud](../ex6/README.md)
 
 ## Access to Tenants
-URLs
-Username: ABSBDS2983293
+- [SAP Business Data Cloud Cockpit](https://trial-bdc-core-3.eu10.hcs.cloud.sap/bdc-ui/index.html)
+- [SAP Analytics Cloud](https://trial-bdc-sac-3.eu10.sapanalytics.cloud/)
+- [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/)
+- [SAP Snowflake](https://188ec0ba-2073-4fff-9922-b677717b7e9a.sharing.hdl.prod-eu20.hanacloud.ondemand.com/)
+
+Username: TAXXXXXXXXXXXX
 Password: shared during the session

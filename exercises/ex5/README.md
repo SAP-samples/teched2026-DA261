@@ -3,7 +3,7 @@
 In this exercise, we will create an integrated data model. We will use the data product published from SAP Snowflake and perform modelling in SAP Datasphere.
 
 ## Pre-requisites
-- A custom space in SAP Datasphere provided to you named after your username
+- A custom space in [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/) provided to you named after your username
 - Custom, Derived data product has been installed in the space in the previous exercise
 
 ## Exercise 
@@ -19,7 +19,7 @@ We have 12 tables to create an integrated view. For this use case, we will use t
 There are other KPIs that can be derived from the other tables as well. But for our need, the four tables above are sufficient.
 
 ### Create a Fact View: Department Forecasts
-1. Open **Data Builder** in SAP Datasphere (TODO)
+1. Open **Data Builder** in [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/)
 <br>![dataBuilder](./images/dataBuilder.png)
 
 2. Search for the space and open it. Your space will have your username Eg. `TACXXXXXXXXX`
@@ -233,7 +233,7 @@ LEFT JOIN (
 
 
 ### Create Integrated Analytic Model
-1. Open **Data Builder** in SAP Datasphere (TODO)
+1. Open **Data Builder** in [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/)
 <br>![dataBuilder](./images/dataBuilder.png)
 
 2. Search for the space and open it. Your space will have your username Eg. `ACXXXXXXXXX`

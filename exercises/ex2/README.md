@@ -1,6 +1,6 @@
 # Exercise 2 - HANDS-ON: Consume SAP-managed Data product in Enterprise Snowflake
 
-In this exercise, we will learn how to run simple ML workflows in Snowflake. Open Snowflake which is included in our SAP BDC Formation. Here is the [Snowflake tenant](TODO).
+In this exercise, we will learn how to run simple ML workflows in Snowflake. Open Snowflake which is included in our SAP BDC Formation. Here is the [Snowflake tenant](https://188ec0ba-2073-4fff-9922-b677717b7e9a.sharing.hdl.prod-eu20.hanacloud.ondemand.com).
 In Snowflake, upload the notebook provided as shown in the image below:
 
 <br>![uploadNotebook](./images/uploadNotebook.png)
