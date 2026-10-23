@@ -1,4 +1,4 @@
-# Data & Analytics Insights Agent
+# BONUS GUIDED TOUR - Exercise 7: Data & Analytics Insights Agent
 
 In the previous exercise, you have derived insights with a dashboard using SAP Analytics Cloud.
 Let us now explore the agentic way. We will learn how to use the Data and Analytics insights agent to auto-generate SAC stories with goal suggestion, automatic widget generation, and Joule natural-language chart editing to build a complete analytics story in minutes.
