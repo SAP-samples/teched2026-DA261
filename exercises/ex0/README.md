@@ -27,6 +27,10 @@ The exercises are as follows:
 - [Exercise 6 - Create a report in SAP Analytics Cloud](../ex6/README.md)
 - [Exercise 7 - Bonus: Data & Analytics Insights Agent](../ex7/README.md)
 
+
+ObTRYi5OU51!
+
+
 ## Access to Tenants
 - [SAP Business Data Cloud Cockpit](https://trial-bdc-core-3.eu10.hcs.cloud.sap/bdc-ui/index.html)
 - [SAP Analytics Cloud](https://trial-bdc-sac-3.eu10.sapanalytics.cloud/)
