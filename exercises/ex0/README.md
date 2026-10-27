@@ -32,3 +32,6 @@ The exercises are as follows:
 - [SAP Analytics Cloud](https://trial-bdc-sac-3.eu10.sapanalytics.cloud/)
 - [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/)
 - [SAP Snowflake](https://188ec0ba-2073-4fff-9922-b677717b7e9a.sharing.hdl.prod-eu20.hanacloud.ondemand.com/)
+
+
+ObTRYi5OU51!
