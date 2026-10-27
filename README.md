@@ -1,5 +1,7 @@
 # DA261: Transform business data into AI-supported insights
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/teched2026-DA261)](https://api.reuse.software/info/github.com/SAP-samples/teched2026-DA261)
+
 ## Description
 
 This repository contains the material for the SAP TechEd 2026 session called [DA261: Transform business data into AI-supported insights.](https://www.sap.com/events/teched/berlin/flow/sap/te26/catalog/page/catalog/session/1785942707216001IsZT)
