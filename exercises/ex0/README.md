@@ -34,4 +34,4 @@ The exercises are as follows:
 - [SAP Snowflake](https://188ec0ba-2073-4fff-9922-b677717b7e9a.sharing.hdl.prod-eu20.hanacloud.ondemand.com/)
 
 
-ObTRYi5OU51!
+Ob1JQ5lQ0N1!
