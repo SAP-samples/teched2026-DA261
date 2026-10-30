@@ -51,7 +51,7 @@ The top row of the dashboard contains **four Numeric Point (KPI) widgets** that 
 2. Set the chart type to **Numeric Point**.
 3. Resize it to occupy roughly one-sixth of the page width.
 
-<br>![numericPoint](./images/numericPoint.png)
+<br>![numericPoint](./images/NumericPoint.png)
 
 4. For each of the next four Numeric Point charts, you will do the following:
 - Open the Builder & add a new measure
