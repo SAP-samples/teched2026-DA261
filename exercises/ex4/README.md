@@ -1,4 +1,4 @@
-# Exercise 4 - READ-ONLY, HANDS-ON: Install custom data product in SAP Datasphere
+# Exercise 4 - HANDS-ON: Install custom data product in SAP Datasphere
 
 We will now install the newly created and published data product in SAP Datasphere. 
 The installation process is governed by Data product data governance. This is a new capability that will be available in SAP Business Data Cloud (SAP BDC) on wave 2026.20, released in September 2026. This new capability introduces a structured, auditable process for controlling access to data products across your organization. Rather than relying on direct permissions and manual sharing, governance shifts access management to a request-based model — one where requests are tracked, reviewed, and recorded as access agreements. to learn more about the process, you can visit this great [blog](https://community.sap.com/t5/technology-blog-posts-by-sap/data-product-data-governance-in-sap-business-data-cloud/ba-p/14470556).
@@ -16,7 +16,8 @@ Without auto-approval enabled, the steward must manually approve each data produ
 ## HANDS-ON: Install Data Product in SAP Datasphere
 ### Access Request creation and approval
 1. Navigate to [SAP Datasphere](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/).
-2. Open **Catalog & Marketplace** and search for the data product `Workforce Transformation Intelligence`.
+2. Open **Catalog & Marketplace** and search for the data product `Workforce Transformation Velocity Intelligence`. The data product is [here](https://trial-bdc-datasphere-3.eu10.hcs.cloud.sap/dwaas-core/index.html#/catalogucldataproducts&/odc/ucldataproduct/FDD9637B3D6C7A091A007A8AF143FEBE)
+
 <br>![openCatalog](./images/openCatalog.png)
 
 3. Click on **Add to Cart**.
